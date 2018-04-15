@@ -1,0 +1,21 @@
+.Checkout {
+	display: flex;
+	min-height: 100vh;
+
+	&Main {
+		padding-left: 30px;
+		padding-right: 30px;
+		flex-grow: 5;
+	}
+
+	&Cart {
+		padding-left: 30px;
+		padding-right: 30px;
+		flex-grow: 1;
+		background: #f7fbff;
+
+		&__title {
+			margin-bottom: 20px;
+		}
+	}
+}
