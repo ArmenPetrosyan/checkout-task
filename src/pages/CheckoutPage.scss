@@ -17,5 +17,12 @@
 		&__title {
 			margin-bottom: 20px;
 		}
+
+		&__header {
+			padding-top: 24px;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+		}
 	}
 }

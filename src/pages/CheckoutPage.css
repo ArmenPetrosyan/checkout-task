@@ -12,3 +12,8 @@
     background: #f7fbff; }
     .CheckoutCart__title {
       margin-bottom: 20px; }
+    .CheckoutCart__header {
+      padding-top: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between; }
