@@ -37,13 +37,15 @@ class CustomerList extends Component {
   };
 
   onEditButtonClick = () => {
-    this.props.openModal();
+    const customerID = this.state.anchorEl.getAttribute('aria-owns');
+    // alert(customerID);
+    this.props.openModal(customerID, 'edit');
     this.onCustomerMenuClose();
   };
 
   onDeleteButtonClick = () => {
-    const customerName = this.state.anchorEl.getAttribute('aria-owns');
-    this.props.onCustomerDelete(customerName);
+    const customerID = this.state.anchorEl.getAttribute('aria-owns');
+    this.props.onCustomerDelete(customerID);
     this.onCustomerMenuClose();
   };
 

@@ -49,12 +49,18 @@ class CheckoutMain extends Component {
     super();
 
     this.state = {
-      popupOpened: false
+      popupOpened: false,
+      formType: null,
+      currentCustomerID: null
     }
   }
 
-  handleOpen = () => {
-    this.setState({ popupOpened: true });
+  handleOpen = (customerID, formType='create') => {
+    this.setState({
+      popupOpened: true,
+      formType,
+      currentCustomerID: customerID
+    });
   };
 
   handleClose = () => {
@@ -62,16 +68,41 @@ class CheckoutMain extends Component {
   };
 
   onAddCustomer = () => {
-    this.handleOpen();
+    // increment greatest id
+    const newID = ++this.props.checkout._lastID;
+    this.handleOpen(newID);
   };
 
-  onEditCustomer = () => {
-    this.handleOpen();
+  customerFormSubmit = (values) => {
+    const {currentCustomerID} = this.state;
+    const customer = {
+      name          : values.name,
+      address       : values.address,
+      paymentMethod : {
+        type        : values.paymentMethod,
+        cardNumber  : values.cardNumber,
+        expDate     : values.expires,
+        cvv         : values.cvv
+      },
+      id            : currentCustomerID
+    };
+
+    console.log(values, customer);
+
+    if(this.state.formType === 'create') {
+      console.log(`Create user with ID ${currentCustomerID}`, values );
+    } else {
+      // edit customer
+      // console.log(`Edit user with ID ${currentCustomerID}`, values );
+      this.props.onCustomerEdit(customer)
+    }
   };
 
+  getCustomer = (customerID) => (customerID) ? this.props.checkout.customers.filter(({id}) => (id == customerID))[0] : null;
 
   render () {
     const {classes} = this.props;
+    const {currentCustomerID} = this.state;
     const steps = ['01 Customer account', '02 Payments selection'];
 
     return (
@@ -82,7 +113,7 @@ class CheckoutMain extends Component {
 
         <Divider light />
 
-        <Stepper activeStep={this.props.step} alternativeLabel>
+        <Stepper activeStep={this.props.checkout.step} alternativeLabel>
           {steps.map(label => {
             return (
               <Step key={label}>
@@ -94,8 +125,8 @@ class CheckoutMain extends Component {
 
         <div className={classes}>
           <CustomerList
-            customers={this.props.customers}
-            selectedCustomer={this.props.selectedCustomer}
+            customers={this.props.checkout.customers}
+            selectedCustomer={this.props.checkout.selected}
             onCustomerDelete={this.props.onCustomerDelete}
             onCheckboxChange={this.props.onCheckboxChange}
             onEditCustomer={this.onEditCustomer}
@@ -122,6 +153,8 @@ class CheckoutMain extends Component {
           <div style={getModalStyle()} className={classes.paper}>
             <CustomerForm
               onCustomerEdit={this.props.onCustomerEdit}
+              onSubmit={this.customerFormSubmit}
+              customer={this.getCustomer(currentCustomerID)}
             />
           </div>
         </Modal>

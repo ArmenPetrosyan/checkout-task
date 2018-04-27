@@ -39,7 +39,7 @@ class Customer extends Component {
           action={
             <div>
               <IconButton
-                aria-owns={anchorEl ? customerName : null}
+                aria-owns={anchorEl ? customerID : null}
                 aria-haspopup="true"
                 onClick={this.props.onCustomerMenuClick}
               >

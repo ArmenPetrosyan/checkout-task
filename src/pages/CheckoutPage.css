@@ -3,12 +3,10 @@
   min-height: 100vh; }
   .CheckoutMain {
     padding-left: 30px;
-    padding-right: 30px;
-    flex-grow: 5; }
+    padding-right: 30px; }
   .CheckoutCart {
     padding-left: 30px;
     padding-right: 30px;
-    flex-grow: 1;
     background: #f7fbff; }
     .CheckoutCart__title {
       margin-bottom: 20px; }

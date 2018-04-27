@@ -1,8 +1,9 @@
 import React from 'react';
+import { Field, reduxForm } from 'redux-form';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
+import { TextField } from 'redux-form-material-ui';
 import Button from 'material-ui/Button';
-import TextField from 'material-ui/TextField';
 import MenuItem from 'material-ui/Menu/MenuItem';
 
 const styles = theme => ({
@@ -49,62 +50,45 @@ class CustomerForm extends React.Component {
 
   constructor(props) {
     super(props);
-
-    this.state = {
-      id: this.props.id,
-      name: this.props.name,
-      address: this.props.address,
-      paymentMethod: {
-        type: this.props.paymentMethod,
-        cardNumber: this.props.cardNumber,
-        expDate: this.props.expDate,
-        cvv: this.props.cvv
-      }
-    };
   }
 
-
-
   handleChange = name => event => {
-    this.setState({
-      [name]: event.target.value,
-    });
-  };
-
-  saveCustomerInfo = (event) => {
-    event.persist();
-    console.log(event);
-    // this.props.onCustomerEdit(this.state);
+    // this.setState({
+    //   [name]: event.target.value,
+    // });
   };
 
   render() {
-    const { classes } = this.props;
+    const { classes, handleSubmit, customer } = this.props;
 
     return (
-      <form className={classes.container} noValidate autoComplete="off">
-        <TextField
-          id="name"
+      <form className={classes.container} noValidate autoComplete="off" onSubmit={handleSubmit}>
+        <Field
+          name="name"
           label="Name"
           className={classes.textField}
-          value={this.state.name}
+          value={customer.name}
           onChange={this.handleChange('name')}
           margin="normal"
+          component={TextField}
         />
-        <TextField
-          id="address"
+        <Field
+          name="address"
           label="Address"
           className={classes.textField}
-          value={this.state.address}
+          value={customer.address}
           onChange={this.handleChange('address')}
           margin="normal"
+          component={TextField}
         />
-        <TextField
-          id="select-currency"
+        <Field
+          name="paymentMethod"
           select
           label="Payment method"
           className={classes.textField}
-          value={this.state.paymentMethod.type}
-          onChange={this.handleChange('paymentMethod')}
+          value={customer.paymentMethod.type}
+          onChange={this.handleChange('paymentMethod.type')}
+          component={TextField}
           SelectProps={{
             MenuProps: {
               className: classes.menu,
@@ -118,41 +102,44 @@ class CustomerForm extends React.Component {
               {option.label}
             </MenuItem>
           ))}
-        </TextField>
+        </Field>
         <p>
           Safe money transfer using your bank account. Visa, Maestro, Discover, American Express.
         </p>
         <div className={classes.fieldSet}>
-          <TextField
-            id="card-number"
+          <Field
+            name="cardNumber"
             label="Card number"
             className={classes.textField}
-            value={this.state.paymentMethod.cardNumber}
-            onChange={this.handleChange('cardNumber')}
+            value={customer.paymentMethod.cardNumber}
+            onChange={this.handleChange('paymentMethod.cardNumber')}
             margin="normal"
+            component={TextField}
           />
-          <TextField
-            id="expires"
+          <Field
+            name="expires"
             label="Expires"
             className={classes.textField}
-            value={this.state.paymentMethod.expDate}
-            onChange={this.handleChange('expires')}
+            value={customer.paymentMethod.expDate}
+            onChange={this.handleChange('paymentMethod.expires')}
             margin="normal"
+            component={TextField}
           />
-          <TextField
-            id="cvv"
+          <Field
+            name="cvv"
             label="CVV"
             className={classes.textField}
-            value={this.state.paymentMethod.cvv}
-            onChange={this.handleChange('cvv')}
+            value={customer.paymentMethod.cvv}
+            onChange={this.handleChange('paymentMethod.cvv')}
             margin="normal"
+            component={TextField}
           />
         </div>
         <Button
           variant="flat"
           color="primary"
           className={classes.button}
-          onClick={this.saveCustomerInfo}
+          type="submit"
         >
           Save details
         </Button>
@@ -178,4 +165,6 @@ CustomerForm.defaultProps = {
   }
 };
 
-export default withStyles(styles)(CustomerForm);
+export default reduxForm({
+  form: 'customer'
+})(withStyles(styles)(CustomerForm));

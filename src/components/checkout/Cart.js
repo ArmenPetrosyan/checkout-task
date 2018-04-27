@@ -28,6 +28,10 @@ const styles = theme => ({
   }
 });
 
+const submitCart = () => {
+  alert('Shopping Cart was submitted!');
+};
+
 const CheckoutCart = (props) => {
   const { classes } = props;
   return (
@@ -69,6 +73,7 @@ const CheckoutCart = (props) => {
         color="primary"
         className={classes.button}
         disabled={!props.completed}
+        onClick={submitCart}
       >
         Complete order
       </Button>

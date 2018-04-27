@@ -23,15 +23,21 @@ const initialState = {
       }
     },
   ],
-  step: 1,
+  step: 0,
   completed: false,
-  selected: 0
+  selected: 0,
+  _lastID: 1
 };
 
 const checkoutReducer = (state = initialState, action) => {
 
   switch (action.type) {
-    case 'ADD_CUSTOMER':
+    case 'ADD_CUSTOMER': {
+      return {
+        ...state,
+        _lastID: state._lastID++
+      }
+    }
     case 'EDIT_CUSTOMER': {
       return {
         ...state,
@@ -41,7 +47,7 @@ const checkoutReducer = (state = initialState, action) => {
     case 'DELETE_CUSTOMER':{
       return {
         ...state,
-        customers: state.customers.filter(customer => customer.name !== action.payload)
+        customers: state.customers.filter(customer => customer.id != action.payload)
       }
     }
     case 'SELECT_CUSTOMER': {

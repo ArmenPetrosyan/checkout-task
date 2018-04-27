@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import CheckoutMain from './../components/checkout/Main';
 import CheckoutCart from '../components/checkout/Cart';
+import Grid from 'material-ui/Grid';
 import {changeStep, selectCustomer, deleteCustomer, editCustomer} from './../actions';
 import { connect } from 'react-redux';
 import './CheckoutPage.css';
@@ -18,8 +19,8 @@ const mapDispatchToProps = dispatch => ({
   onCheckboxChange: customerID => {
     dispatch(selectCustomer(customerID));
   },
-  onCustomerDelete: customerName => {
-    dispatch(deleteCustomer(customerName));
+  onCustomerDelete: customerID => {
+    dispatch(deleteCustomer(customerID));
   },
   onCustomerEdit: customer => {
     dispatch(editCustomer(customer));
@@ -30,19 +31,23 @@ class App extends Component {
   render() {
     return (
       <section className="Checkout">
-        <CheckoutMain
-          onCheckboxChange={this.props.onCheckboxChange}
-          onStepChange={this.props.onStepChange}
-          onCustomerDelete={this.props.onCustomerDelete}
-          onCustomerEdit={this.props.onCustomerEdit}
-          customers={this.props.checkout.customers}
-          step={this.props.checkout.step}
-          selectedCustomer={this.props.checkout.selected}
-        />
-        <CheckoutCart
-          cart={this.props.cart}
-          completed={this.props.checkout.completed}
-        />
+        <Grid container spacing={24}>
+          <Grid item sm={8}>
+            <CheckoutMain
+              onCheckboxChange={this.props.onCheckboxChange}
+              onStepChange={this.props.onStepChange}
+              onCustomerDelete={this.props.onCustomerDelete}
+              onCustomerEdit={this.props.onCustomerEdit}
+              checkout={this.props.checkout}
+            />
+          </Grid>
+          <Grid item sm={4}>
+            <CheckoutCart
+              cart={this.props.cart}
+              completed={this.props.checkout.completed}
+            />
+          </Grid>
+        </Grid>
       </section>
     );
   }

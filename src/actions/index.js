@@ -8,9 +8,9 @@ export const addCustomer = customer => ({
   payload: customer
 });
 
-export const deleteCustomer = customerName => ({
+export const deleteCustomer = customerID => ({
   type: 'DELETE_CUSTOMER',
-  payload: customerName
+  payload: customerID
 });
 
 export const selectCustomer = customerID => ({
