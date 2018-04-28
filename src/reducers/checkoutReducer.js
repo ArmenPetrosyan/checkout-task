@@ -4,23 +4,19 @@ const initialState = {
       id            : 0,
       name          : 'John Doe',
       address       : '1st Main street, New York, USA',
-      paymentMethod : {
-        type        : 'Credit card',
-        cardNumber  : '1111222233334444',
-        expDate     : '09/22',
-        cvv         : '000'
-      }
+      paymentType   : 'Credit card',
+      cardNumber    : '1111222233334444',
+      expDate       : '09/22',
+      cvv           : '000'
     },
     {
       id            : 1,
       name          : 'Mike Stain',
       address       : '1st Main street, New York, USA',
-      paymentMethod : {
-        type        : 'PayPal',
-        cardNumber  : '1111222233334444',
-        expDate     : '09/22',
-        cvv         : '000'
-      }
+      paymentType   : 'Credit card',
+      cardNumber    : '1111222233334444',
+      expDate       : '09/22',
+      cvv           : '000'
     },
   ],
   step: 0,
@@ -35,13 +31,14 @@ const checkoutReducer = (state = initialState, action) => {
     case 'ADD_CUSTOMER': {
       return {
         ...state,
-        _lastID: state._lastID++
+        _lastID: ++state._lastID,
+        customers: state.customers.push(action.payload)
       }
     }
     case 'EDIT_CUSTOMER': {
       return {
         ...state,
-        customers: state.customers.map(customer => (customer.id == action.payload.id) ? Object.assign({}, customer, action.payload) : customer)
+        customers: state.customers.map(customer => (customer.id == action.payload.id) ? {...customer, ...action.payload} : customer)
       }
     }
     case 'DELETE_CUSTOMER':{

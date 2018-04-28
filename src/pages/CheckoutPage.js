@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import CheckoutMain from './../components/checkout/Main';
 import CheckoutCart from '../components/checkout/Cart';
 import Grid from 'material-ui/Grid';
-import {changeStep, selectCustomer, deleteCustomer, editCustomer} from './../actions';
+import {changeStep, selectCustomer, deleteCustomer, editCustomer, addCustomer} from './../actions';
 import { connect } from 'react-redux';
 import './CheckoutPage.css';
 
@@ -24,6 +24,10 @@ const mapDispatchToProps = dispatch => ({
   },
   onCustomerEdit: customer => {
     dispatch(editCustomer(customer));
+  },
+  onCustomerAdd: customer => {
+    console.log(customer);
+    // dispatch(addCustomer(customer));
   }
 });
 
@@ -38,6 +42,7 @@ class App extends Component {
               onStepChange={this.props.onStepChange}
               onCustomerDelete={this.props.onCustomerDelete}
               onCustomerEdit={this.props.onCustomerEdit}
+              onCustomerAdd={this.props.onCustomerAdd}
               checkout={this.props.checkout}
             />
           </Grid>

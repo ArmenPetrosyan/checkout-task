@@ -38,7 +38,6 @@ class CustomerList extends Component {
 
   onEditButtonClick = () => {
     const customerID = this.state.anchorEl.getAttribute('aria-owns');
-    // alert(customerID);
     this.props.openModal(customerID, 'edit');
     this.onCustomerMenuClose();
   };
@@ -59,6 +58,7 @@ class CustomerList extends Component {
           this.props.customers.map(
             (customer) => (
               <Customer
+                key={customer.name}
                 onCustomerMenuClick={this.onCustomerMenuClick}
                 onCustomerMenuClose={this.onCustomerMenuClose}
                 onDeleteButtonClick={this.onDeleteButtonClick}

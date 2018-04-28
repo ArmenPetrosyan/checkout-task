@@ -76,29 +76,35 @@ class CheckoutMain extends Component {
   customerFormSubmit = (values) => {
     const {currentCustomerID} = this.state;
     const customer = {
-      name          : values.name,
-      address       : values.address,
-      paymentMethod : {
-        type        : values.paymentMethod,
-        cardNumber  : values.cardNumber,
-        expDate     : values.expires,
-        cvv         : values.cvv
-      },
-      id            : currentCustomerID
+      ...values,
+      id : currentCustomerID
     };
 
     console.log(values, customer);
 
     if(this.state.formType === 'create') {
       console.log(`Create user with ID ${currentCustomerID}`, values );
+      this.props.onCustomerAdd(customer);
     } else {
       // edit customer
-      // console.log(`Edit user with ID ${currentCustomerID}`, values );
-      this.props.onCustomerEdit(customer)
+      console.log(`Edit user with ID ${currentCustomerID}`, values );
+      this.props.onCustomerEdit(customer);
     }
+    this.handleClose();
   };
 
-  getCustomer = (customerID) => (customerID) ? this.props.checkout.customers.filter(({id}) => (id == customerID))[0] : null;
+  getCustomer = (customerID) => {
+    const defaultCustomer = {
+      id          : customerID,
+      name        : 'Garry Smith',
+      address     : '1st Main street, New York, USA',
+      paymentType : 'PayPal',
+      cardNumber  : '1111222233334444',
+      expDate     : '09/22',
+      cvv         : '000'
+    };
+    return (this.state.formType !== 'create') ? this.props.checkout.customers.filter(({id}) => (id == customerID))[0] : defaultCustomer;
+  };
 
   render () {
     const {classes} = this.props;
@@ -129,7 +135,6 @@ class CheckoutMain extends Component {
             selectedCustomer={this.props.checkout.selected}
             onCustomerDelete={this.props.onCustomerDelete}
             onCheckboxChange={this.props.onCheckboxChange}
-            onEditCustomer={this.onEditCustomer}
             openModal={this.handleOpen}
           />
 
@@ -154,7 +159,7 @@ class CheckoutMain extends Component {
             <CustomerForm
               onCustomerEdit={this.props.onCustomerEdit}
               onSubmit={this.customerFormSubmit}
-              customer={this.getCustomer(currentCustomerID)}
+              initialValues={this.getCustomer(currentCustomerID)}
             />
           </div>
         </Modal>

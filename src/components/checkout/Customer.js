@@ -23,7 +23,7 @@ const styles = theme => ({
 class Customer extends Component {
   render () {
     const { classes, anchorEl } = this.props;
-    const { id:customerID, name:customerName, paymentMethod } = this.props.customer;
+    const { id:customerID, name:customerName, paymentType } = this.props.customer;
 
     return (
       <Card className={classes.card}>
@@ -49,12 +49,12 @@ class Customer extends Component {
             </div>
           }
           title={customerName}
-          subheader={paymentMethod.type}
+          subheader={paymentType}
         />
         <Radio
           checked={this.props.isChecked}
           onClick={this.props.onRadioChecked}
-          value={customerID}
+          value={`${customerID}`}
           aria-label={customerName}
           classes={{
             checked: classes.checked,

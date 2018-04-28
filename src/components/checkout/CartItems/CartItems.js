@@ -16,7 +16,7 @@ const Item = ({title, brand, price, img}) => (
 const CartItems = (props) => {
   return(
     <List>
-      {props.items.map(({title, brand, price, img}) => (<Item title={title} brand={brand} price={price} img={img} />))}
+      {props.items.map(({title, brand, price, img}) => (<Item key={title} title={title} brand={brand} price={price} img={img} />))}
     </List>
   )
 };

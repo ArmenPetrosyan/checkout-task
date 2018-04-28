@@ -31,7 +31,7 @@ const styles = theme => ({
   },
 });
 
-const currencies = [
+const paymentTypes = [
   {
     value: 'CREDIT_CARD',
     label: 'Credit card',
@@ -52,14 +52,8 @@ class CustomerForm extends React.Component {
     super(props);
   }
 
-  handleChange = name => event => {
-    // this.setState({
-    //   [name]: event.target.value,
-    // });
-  };
-
   render() {
-    const { classes, handleSubmit, customer } = this.props;
+    const { classes, handleSubmit } = this.props;
 
     return (
       <form className={classes.container} noValidate autoComplete="off" onSubmit={handleSubmit}>
@@ -67,8 +61,6 @@ class CustomerForm extends React.Component {
           name="name"
           label="Name"
           className={classes.textField}
-          value={customer.name}
-          onChange={this.handleChange('name')}
           margin="normal"
           component={TextField}
         />
@@ -76,18 +68,14 @@ class CustomerForm extends React.Component {
           name="address"
           label="Address"
           className={classes.textField}
-          value={customer.address}
-          onChange={this.handleChange('address')}
           margin="normal"
           component={TextField}
         />
         <Field
-          name="paymentMethod"
-          select
+          name="paymentType"
           label="Payment method"
+          select
           className={classes.textField}
-          value={customer.paymentMethod.type}
-          onChange={this.handleChange('paymentMethod.type')}
           component={TextField}
           SelectProps={{
             MenuProps: {
@@ -97,11 +85,13 @@ class CustomerForm extends React.Component {
           helperText="Please select your payment method"
           margin="normal"
         >
-          {currencies.map(option => (
-            <MenuItem key={option.value} value={option.value}>
-              {option.label}
-            </MenuItem>
-          ))}
+          {
+            paymentTypes.map(option => (
+              <MenuItem key={option.value} value={option.label}>
+                {option.label}
+              </MenuItem>
+            ))
+          }
         </Field>
         <p>
           Safe money transfer using your bank account. Visa, Maestro, Discover, American Express.
@@ -111,17 +101,13 @@ class CustomerForm extends React.Component {
             name="cardNumber"
             label="Card number"
             className={classes.textField}
-            value={customer.paymentMethod.cardNumber}
-            onChange={this.handleChange('paymentMethod.cardNumber')}
             margin="normal"
             component={TextField}
           />
           <Field
-            name="expires"
+            name="expDate"
             label="Expires"
             className={classes.textField}
-            value={customer.paymentMethod.expDate}
-            onChange={this.handleChange('paymentMethod.expires')}
             margin="normal"
             component={TextField}
           />
@@ -129,8 +115,6 @@ class CustomerForm extends React.Component {
             name="cvv"
             label="CVV"
             className={classes.textField}
-            value={customer.paymentMethod.cvv}
-            onChange={this.handleChange('paymentMethod.cvv')}
             margin="normal"
             component={TextField}
           />
@@ -153,18 +137,8 @@ CustomerForm.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-CustomerForm.defaultProps = {
-  id: 0,
-  name: 'John Doe',
-  address: '5th Street',
-  paymentMethod: {
-    type: 'Credit card',
-    cardNumber: '0000000000000',
-    expDate: '10/22',
-    cvv: '000'
-  }
-};
-
-export default reduxForm({
+CustomerForm = reduxForm({
   form: 'customer'
 })(withStyles(styles)(CustomerForm));
+
+export default CustomerForm;
