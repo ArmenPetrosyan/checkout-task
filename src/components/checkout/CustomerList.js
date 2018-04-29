@@ -6,6 +6,7 @@ import Customer from './Customer';
 const styles = theme => ({
   customerList: {
     display: 'flex',
+    flexWrap: 'wrap',
     marginTop: 40,
     alignItems: 'center'
   }
@@ -58,7 +59,7 @@ class CustomerList extends Component {
           this.props.customers.map(
             (customer) => (
               <Customer
-                key={customer.name}
+                key={customer.id}
                 onCustomerMenuClick={this.onCustomerMenuClick}
                 onCustomerMenuClose={this.onCustomerMenuClose}
                 onDeleteButtonClick={this.onDeleteButtonClick}

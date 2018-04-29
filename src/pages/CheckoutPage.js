@@ -26,8 +26,8 @@ const mapDispatchToProps = dispatch => ({
     dispatch(editCustomer(customer));
   },
   onCustomerAdd: customer => {
-    console.log(customer);
-    // dispatch(addCustomer(customer));
+    console.log('==',customer);
+    dispatch(addCustomer(customer));
   }
 });
 

@@ -9,6 +9,7 @@ import Modal from 'material-ui/Modal';
 import CustomerList from './CustomerList';
 import CustomerForm from './CustomerForm/CustomerForm';
 
+var shortid = require('shortid');
 
 const styles = theme => ({
   root: theme.mixins.gutters({
@@ -68,8 +69,7 @@ class CheckoutMain extends Component {
   };
 
   onAddCustomer = () => {
-    // increment greatest id
-    const newID = ++this.props.checkout._lastID;
+    const newID = shortid.generate();
     this.handleOpen(newID);
   };
 

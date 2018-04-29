@@ -14,7 +14,9 @@ const styles = theme => ({
   },
   card: {
     maxWidth: 400,
-    marginRight: 20,
+    marginRight: 15,
+    marginLeft: 15,
+    marginBottom: 20,
     display: 'flex',
     alignItems: 'center'
   }

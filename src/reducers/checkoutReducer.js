@@ -1,7 +1,9 @@
+var shortid = require('shortid');
+
 const initialState = {
   customers: [
     {
-      id            : 0,
+      id            : shortid.generate(),
       name          : 'John Doe',
       address       : '1st Main street, New York, USA',
       paymentType   : 'Credit card',
@@ -10,7 +12,7 @@ const initialState = {
       cvv           : '000'
     },
     {
-      id            : 1,
+      id            : shortid.generate(),
       name          : 'Mike Stain',
       address       : '1st Main street, New York, USA',
       paymentType   : 'Credit card',
@@ -22,17 +24,14 @@ const initialState = {
   step: 0,
   completed: false,
   selected: 0,
-  _lastID: 1
 };
 
 const checkoutReducer = (state = initialState, action) => {
-
   switch (action.type) {
     case 'ADD_CUSTOMER': {
       return {
         ...state,
-        _lastID: ++state._lastID,
-        customers: state.customers.push(action.payload)
+        customers: [...state.customers, action.payload]
       }
     }
     case 'EDIT_CUSTOMER': {
