@@ -7,7 +7,9 @@ import Button from 'material-ui/Button';
 import AddIcon from '@material-ui/icons/Add';
 import Modal from 'material-ui/Modal';
 import CustomerList from './CustomerList';
+import PaymentList from './PaymentList';
 import CustomerForm from './CustomerForm/CustomerForm';
+import * as steps from './../../steps';
 
 var shortid = require('shortid');
 
@@ -106,10 +108,18 @@ class CheckoutMain extends Component {
     return (this.state.formType !== 'create') ? this.props.checkout.customers.filter(({id}) => (id == customerID))[0] : defaultCustomer;
   };
 
+  continuePayment = () => {
+    if(this.props.checkout.selectedCustomer) {
+      this.props.onStepChange(steps.PAYMENT_SELECTION);
+    } else {
+      alert('Sorry, select the customer before!');
+    }
+  };
+
   render () {
     const {classes} = this.props;
     const {currentCustomerID} = this.state;
-    const steps = ['01 Customer account', '02 Payments selection'];
+    const stepLabels = ['01 Customer account', '02 Payments selection'];
 
     return (
       <main className="CheckoutMain">
@@ -120,7 +130,7 @@ class CheckoutMain extends Component {
         <Divider light />
 
         <Stepper activeStep={this.props.checkout.step} alternativeLabel>
-          {steps.map(label => {
+          {stepLabels.map(label => {
             return (
               <Step key={label}>
                 <StepLabel>{label}</StepLabel>
@@ -129,29 +139,33 @@ class CheckoutMain extends Component {
           })}
         </Stepper>
 
-        <div className={classes}>
-          <CustomerList
-            customers={this.props.checkout.customers}
-            selectedCustomer={this.props.checkout.selected}
-            onCustomerDelete={this.props.onCustomerDelete}
-            onCheckboxChange={this.props.onCheckboxChange}
-            openModal={this.handleOpen}
+        {(this.props.checkout.step == steps.CUSTOMER_SELECTION) ?
+          <div className={classes}>
+            <CustomerList
+              customers={this.props.checkout.customers}
+              selectedCustomer={this.props.checkout.selectedCustomer}
+              onCustomerDelete={this.props.onCustomerDelete}
+              onCustomerChange={this.props.onCustomerChange}
+              openModal={this.handleOpen}
+            />
+
+            <Button
+              variant="fab"
+              color="secondary"
+              aria-label="add"
+              className={classes.button}
+              onClick={this.onAddCustomer}
+            >
+              <AddIcon />
+            </Button>
+          </div> :
+          <PaymentList
+            onPaymentChange={this.props.onPaymentChange}
+            selectedPayment={this.props.checkout.selectedPayment}
+            payments={this.props.checkout.payments}
           />
-
-          <Button
-            variant="fab"
-            color="secondary"
-            aria-label="add"
-            className={classes.button}
-            onClick={this.onAddCustomer}
-          >
-            <AddIcon />
-          </Button>
-        </div>
-
+        }
         <Modal
-          aria-labelledby="simple-modal-title"
-          aria-describedby="simple-modal-description"
           open={this.state.popupOpened}
           onClose={this.handleClose}
         >
@@ -168,7 +182,7 @@ class CheckoutMain extends Component {
           variant="flat"
           color="primary"
           className={classes.button}
-          onClick={this.props.onStepChange}
+          onClick={this.continuePayment}
         >
           Continue to payment
         </Button>

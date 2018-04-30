@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import CheckoutMain from './../components/checkout/Main';
+import CheckoutMain from '../components/checkout/Checkout';
 import CheckoutCart from '../components/checkout/Cart';
 import Grid from 'material-ui/Grid';
-import {changeStep, selectCustomer, deleteCustomer, editCustomer, addCustomer} from './../actions';
+import {changeStep, selectCustomer, deleteCustomer, editCustomer, addCustomer, selectPayment} from './../actions';
 import { connect } from 'react-redux';
 import './CheckoutPage.css';
 
@@ -14,10 +14,13 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   onStepChange: step => {
-    dispatch(changeStep(step = 2));
+    dispatch(changeStep(step));
   },
-  onCheckboxChange: customerID => {
+  onCustomerChange: customerID => {
     dispatch(selectCustomer(customerID));
+  },
+  onPaymentChange: paymentID => {
+    dispatch(selectPayment(paymentID));
   },
   onCustomerDelete: customerID => {
     dispatch(deleteCustomer(customerID));
@@ -26,7 +29,6 @@ const mapDispatchToProps = dispatch => ({
     dispatch(editCustomer(customer));
   },
   onCustomerAdd: customer => {
-    console.log('==',customer);
     dispatch(addCustomer(customer));
   }
 });
@@ -38,7 +40,8 @@ class App extends Component {
         <Grid container spacing={24}>
           <Grid item sm={8}>
             <CheckoutMain
-              onCheckboxChange={this.props.onCheckboxChange}
+              onCustomerChange={this.props.onCustomerChange}
+              onPaymentChange={this.props.onPaymentChange}
               onStepChange={this.props.onStepChange}
               onCustomerDelete={this.props.onCustomerDelete}
               onCustomerEdit={this.props.onCustomerEdit}

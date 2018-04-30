@@ -23,7 +23,7 @@ class CustomerList extends Component {
 
   onRadioChecked = event => {
     const targetCustomer = event.target.value;
-    this.props.onCheckboxChange(targetCustomer);
+    this.props.onCustomerChange(targetCustomer);
     this.setState({
       checkedRadio: targetCustomer
     });

@@ -1,3 +1,4 @@
+import * as steps from './../steps';
 var shortid = require('shortid');
 
 const initialState = {
@@ -21,9 +22,30 @@ const initialState = {
       cvv           : '000'
     },
   ],
-  step: 0,
+  payments: [
+    {
+      id: 1,
+      title: 'PayPal',
+      serviceTax: 0.01,
+      VAT : 0.05
+    },
+    {
+      id: 2,
+      title: 'Visa',
+      serviceTax: 0.01,
+      VAT : 0
+    },
+    {
+      id: 3,
+      title: 'Balance',
+      serviceTax: 0,
+      VAT : 0
+    },
+  ],
+  step: steps.PAYMENT_SELECTION,
   completed: false,
-  selected: 0,
+  selectedCustomer: 0,
+  selectedPayment: 0,
 };
 
 const checkoutReducer = (state = initialState, action) => {
@@ -43,20 +65,27 @@ const checkoutReducer = (state = initialState, action) => {
     case 'DELETE_CUSTOMER':{
       return {
         ...state,
-        customers: state.customers.filter(customer => customer.id != action.payload)
+        customers: state.customers.filter(customer => customer.id != action.payload),
+        selected: 0
       }
     }
     case 'SELECT_CUSTOMER': {
       return {
         ...state,
-        selected: action.payload
+        selectedCustomer: action.payload
+      }
+    }
+    case 'SELECT_PAYMENT': {
+      return {
+        ...state,
+        selectedPayment: action.payload
       }
     }
     case 'CHANGE_STEP': {
       return {
         ...state,
         step: action.payload,
-        completed: action.payload >= 2
+        completed: action.payload == steps.PAYMENT_DONE
       };
     }
     default:

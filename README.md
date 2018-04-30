@@ -1,5 +1,7 @@
-##Checkout - test work
 
+### Checkout - test work
+
+---
 *Bootstrapped with React-create-app.*
 #### Tools & Libs
 - React

@@ -99,6 +99,7 @@ class CustomerForm extends React.Component {
         <div className={classes.fieldSet}>
           <Field
             name="cardNumber"
+            type="number"
             label="Card number"
             className={classes.textField}
             margin="normal"
@@ -113,6 +114,7 @@ class CustomerForm extends React.Component {
           />
           <Field
             name="cvv"
+            type="number"
             label="CVV"
             className={classes.textField}
             margin="normal"

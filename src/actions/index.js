@@ -18,6 +18,11 @@ export const selectCustomer = customerID => ({
   payload: customerID
 });
 
+export const selectPayment = paymentID => ({
+  type: 'SELECT_PAYMENT',
+  payload: paymentID
+});
+
 export const editCustomer = customer => ({
   type: 'EDIT_CUSTOMER',
   payload: customer
