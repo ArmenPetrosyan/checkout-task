@@ -1,9 +1,7 @@
-###Checkout - test work
+##Checkout - test work
 
----
-
-#### Tools & Libs
 *Bootstrapped with React-create-app.*
+#### Tools & Libs
 - React
 - redux
 - redux-form
@@ -15,8 +13,16 @@
 - yarn install
 - yarn start
 
-Project will start on **http://localhost:3000**
+ Project will be running on **http://localhost:3000**
 
-#### How to run tests ?
+#### How to build project?
+- yarn run build
 
+#### How to run tests?
 - yarn run test
+
+#### How to watch style changes?
+- yarn run watch-css
+
+#### How to build styles?
+- yarn run build-css
