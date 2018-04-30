@@ -160,7 +160,9 @@ class CheckoutMain extends Component {
             </Button>
           </div> :
           <PaymentList
+            subtotal={this.props.subtotal}
             onPaymentChange={this.props.onPaymentChange}
+            onCartRecalc={this.props.onCartRecalc}
             selectedPayment={this.props.checkout.selectedPayment}
             payments={this.props.checkout.payments}
           />

@@ -34,6 +34,7 @@ const submitCart = () => {
 
 const CheckoutCart = (props) => {
   const { classes } = props;
+  const {subtotal, VAT, serviceTax} = props.cart;
   return (
     <aside className="CheckoutCart">
       <div className="CheckoutCart__header">
@@ -53,14 +54,26 @@ const CheckoutCart = (props) => {
 
       <List>
         <ListItem className={classes.list}>
-          <ListItemText primary={`Subtotal: $${props.cart.subtotal}`} />
+          <ListItemText primary={`Subtotal: $${subtotal}`} />
         </ListItem>
-        <ListItem className={classes.list}>
-          <ListItemText primary={`Payment processing services 1%: $${props.cart.taxes}`} />
-        </ListItem>
-        <ListItem className={classes.list}>
-          <ListItemText primary={`VAT: $${props.cart.taxes}`} />
-        </ListItem>
+
+        {
+          (serviceTax)
+            ?
+            <ListItem className={classes.list}>
+              <ListItemText primary={`Payment processing services: $${serviceTax}`} />
+            </ListItem>
+            : null
+        }
+
+        {
+          (VAT)
+            ?
+            <ListItem className={classes.list}>
+              <ListItemText primary={`VAT: $${VAT}`} />
+            </ListItem>
+            : null
+        }
       </List>
 
       <Divider light />

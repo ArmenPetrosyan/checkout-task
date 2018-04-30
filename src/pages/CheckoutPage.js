@@ -2,7 +2,15 @@ import React, { Component } from 'react';
 import CheckoutMain from '../components/checkout/Checkout';
 import CheckoutCart from '../components/checkout/Cart';
 import Grid from 'material-ui/Grid';
-import {changeStep, selectCustomer, deleteCustomer, editCustomer, addCustomer, selectPayment} from './../actions';
+import {
+  changeStep,
+  selectCustomer,
+  deleteCustomer,
+  editCustomer,
+  addCustomer,
+  selectPayment,
+  cartRecalc
+} from './../actions';
 import { connect } from 'react-redux';
 import './CheckoutPage.css';
 
@@ -21,6 +29,9 @@ const mapDispatchToProps = dispatch => ({
   },
   onPaymentChange: paymentID => {
     dispatch(selectPayment(paymentID));
+  },
+  onCartRecalc: (serviceTax, VAT, subtotal) => {
+    dispatch(cartRecalc(serviceTax, VAT, subtotal));
   },
   onCustomerDelete: customerID => {
     dispatch(deleteCustomer(customerID));
@@ -42,11 +53,13 @@ class App extends Component {
             <CheckoutMain
               onCustomerChange={this.props.onCustomerChange}
               onPaymentChange={this.props.onPaymentChange}
+              onCartRecalc={this.props.onCartRecalc}
               onStepChange={this.props.onStepChange}
               onCustomerDelete={this.props.onCustomerDelete}
               onCustomerEdit={this.props.onCustomerEdit}
               onCustomerAdd={this.props.onCustomerAdd}
               checkout={this.props.checkout}
+              subtotal={this.props.cart.subtotal}
             />
           </Grid>
           <Grid item sm={4}>

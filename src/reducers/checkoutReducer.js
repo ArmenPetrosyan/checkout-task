@@ -42,7 +42,7 @@ const initialState = {
       VAT : 0
     },
   ],
-  step: steps.PAYMENT_SELECTION,
+  step: steps.CUSTOMER_SELECTION,
   completed: false,
   selectedCustomer: 0,
   selectedPayment: 0,

@@ -23,7 +23,8 @@ const initialState = {
     },
   ],
   subtotal: 1590,
-  taxes: 0,
+  VAT: 0,
+  serviceTax: 0,
   total: 1590
 };
 
@@ -32,7 +33,7 @@ const cartReducer = (state = initialState, action) => {
   switch (action.type) {
     case 'ADD_TO_CART': {
       let subtotal = state.subtotal + action.payload.price;
-      let total = subtotal + state.taxes;
+      let total = subtotal + state.VAT;
 
       return {
         ...state,
@@ -43,13 +44,19 @@ const cartReducer = (state = initialState, action) => {
     }
     case 'REMOVE_FROM_CART': {
       let subtotal = state.subtotal - state.items[action.payload].price;
-      let total = subtotal + state.taxes;
+      let total = subtotal + state.VAT;
 
       return {
         ...state,
         items    : state.items.filter((el, id) => action.payload !== id),
         subtotal : subtotal,
         total    : total
+      };
+    }
+    case 'CART_RECALC': {
+      return {
+        ...state,
+        ...action.payload
       };
     }
     default:
