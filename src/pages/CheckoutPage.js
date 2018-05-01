@@ -17,7 +17,7 @@ import './CheckoutPage.css';
 const mapStateToProps = state => ({
   checkout: state.checkout,
   cart: state.cart,
-  form: state.form,
+  form: state.form
 });
 
 const mapDispatchToProps = dispatch => ({

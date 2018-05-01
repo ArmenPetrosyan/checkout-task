@@ -9,6 +9,7 @@ export const composeEnhancers = () => {
   }
 };
 
-export const configureStore = () => createStore(rootReducer, composeEnhancers());
+export const configureStore = () =>
+  createStore(rootReducer, composeEnhancers());
 
 export default configureStore();

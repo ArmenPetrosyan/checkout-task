@@ -41,6 +41,5 @@ const applyPaymentChange = (serviceTax, VAT, subtotal) => {
     VAT: taxes,
     serviceTax: service,
     total: subtotal + taxes + service
-  }
+  };
 };
-

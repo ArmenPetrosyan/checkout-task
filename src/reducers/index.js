@@ -4,9 +4,9 @@ import cartReducer from './cartReducer';
 import checkoutReducer from './checkoutReducer';
 
 const rootReducer = combineReducers({
-  checkout  : checkoutReducer,
-  cart      : cartReducer,
-  form      : formReducer,
+  checkout: checkoutReducer,
+  cart: cartReducer,
+  form: formReducer
 });
 
 export default rootReducer;

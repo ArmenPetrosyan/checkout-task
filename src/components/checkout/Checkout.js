@@ -18,19 +18,19 @@ const styles = theme => ({
   root: theme.mixins.gutters({
     paddingTop: 16,
     paddingBottom: 16,
-    marginTop: theme.spacing.unit * 3,
+    marginTop: theme.spacing.unit * 3
   }),
   subtitle: {
     marginTop: 40
   },
   button: {
-    marginTop: 40,
+    marginTop: 40
   },
   paper: {
     position: 'absolute',
     backgroundColor: theme.palette.background.paper,
     boxShadow: theme.shadows[5],
-    padding: theme.spacing.unit * 4,
+    padding: theme.spacing.unit * 4
   },
   flexContainer: {
     display: 'flex'
@@ -44,7 +44,7 @@ function getModalStyle() {
   return {
     top: `${top}%`,
     left: `${left}%`,
-    transform: `translate(-${top}%, -${left}%)`,
+    transform: `translate(-${top}%, -${left}%)`
   };
 }
 
@@ -56,10 +56,10 @@ class CheckoutMain extends Component {
       popupOpened: false,
       formType: null,
       currentCustomerID: null
-    }
+    };
   }
 
-  handleOpen = (customerID, formType='create') => {
+  handleOpen = (customerID, formType = 'create') => {
     this.setState({
       popupOpened: true,
       formType,
@@ -76,41 +76,43 @@ class CheckoutMain extends Component {
     this.handleOpen(newID);
   };
 
-  customerFormSubmit = (values) => {
-    const {currentCustomerID} = this.state;
+  customerFormSubmit = values => {
+    const { currentCustomerID } = this.state;
     const customer = {
       ...values,
-      id : currentCustomerID
+      id: currentCustomerID
     };
 
     console.log(values, customer);
 
-    if(this.state.formType === 'create') {
-      console.log(`Create user with ID ${currentCustomerID}`, values );
+    if (this.state.formType === 'create') {
+      console.log(`Create user with ID ${currentCustomerID}`, values);
       this.props.onCustomerAdd(customer);
     } else {
       // edit customer
-      console.log(`Edit user with ID ${currentCustomerID}`, values );
+      console.log(`Edit user with ID ${currentCustomerID}`, values);
       this.props.onCustomerEdit(customer);
     }
     this.handleClose();
   };
 
-  getCustomer = (customerID) => {
+  getCustomer = customerID => {
     const defaultCustomer = {
-      id          : customerID,
-      name        : 'Garry Smith',
-      address     : '1st Main street, New York, USA',
-      paymentType : 'PayPal',
-      cardNumber  : '1111222233334444',
-      expDate     : '09/22',
-      cvv         : '000'
+      id: customerID,
+      name: 'Garry Smith',
+      address: '1st Main street, New York, USA',
+      paymentType: 'PayPal',
+      cardNumber: '1111222233334444',
+      expDate: '09/22',
+      cvv: '000'
     };
-    return (this.state.formType !== 'create') ? this.props.checkout.customers.filter(({id}) => (id == customerID))[0] : defaultCustomer;
+    return this.state.formType !== 'create'
+      ? this.props.checkout.customers.filter(({ id }) => id == customerID)[0]
+      : defaultCustomer;
   };
 
   continuePayment = () => {
-    if(this.props.checkout.selectedCustomer) {
+    if (this.props.checkout.selectedCustomer) {
       this.props.onStepChange(steps.PAYMENT_SELECTION);
     } else {
       alert('Sorry, select the customer before!');
@@ -121,9 +123,9 @@ class CheckoutMain extends Component {
     this.props.onStepChange(steps.CUSTOMER_SELECTION);
   };
 
-  render () {
-    const {classes} = this.props;
-    const {currentCustomerID} = this.state;
+  render() {
+    const { classes } = this.props;
+    const { currentCustomerID } = this.state;
     const stepLabels = ['01 Customer account', '02 Payments selection'];
 
     return (
@@ -144,7 +146,7 @@ class CheckoutMain extends Component {
           })}
         </Stepper>
 
-        {(this.props.checkout.step == steps.CUSTOMER_SELECTION) ?
+        {this.props.checkout.step == steps.CUSTOMER_SELECTION ? (
           <div className={classes}>
             <CustomerList
               customers={this.props.checkout.customers}
@@ -163,10 +165,7 @@ class CheckoutMain extends Component {
             >
               <AddIcon />
             </Button>
-            <Modal
-              open={this.state.popupOpened}
-              onClose={this.handleClose}
-            >
+            <Modal open={this.state.popupOpened} onClose={this.handleClose}>
               <div style={getModalStyle()} className={classes.paper}>
                 <CustomerForm
                   onCustomerEdit={this.props.onCustomerEdit}
@@ -176,7 +175,7 @@ class CheckoutMain extends Component {
               </div>
             </Modal>
 
-            <br/>
+            <br />
 
             <Button
               variant="flat"
@@ -186,7 +185,8 @@ class CheckoutMain extends Component {
             >
               Continue to payment
             </Button>
-          </div> :
+          </div>
+        ) : (
           <div>
             <PaymentList
               subtotal={this.props.subtotal}
@@ -205,10 +205,10 @@ class CheckoutMain extends Component {
               Return to customer account
             </Button>
           </div>
-        }
+        )}
       </main>
-    )
+    );
   }
-};
+}
 
 export default withStyles(styles)(CheckoutMain);

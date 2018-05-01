@@ -15,7 +15,7 @@ const styles = theme => ({
   textField: {
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
-    width: 200,
+    width: 200
   },
   fieldSet: {
     display: 'flex'
@@ -24,30 +24,29 @@ const styles = theme => ({
     marginTop: 40
   },
   menu: {
-    width: 200,
+    width: 200
   },
   paper: {
-    padding: theme.spacing.unit * 4,
-  },
+    padding: theme.spacing.unit * 4
+  }
 });
 
 const paymentTypes = [
   {
     value: 'CREDIT_CARD',
-    label: 'Credit card',
+    label: 'Credit card'
   },
   {
     value: 'PAYPAL',
-    label: 'PayPal',
+    label: 'PayPal'
   },
   {
     value: 'STRIPE',
-    label: 'Stripe',
+    label: 'Stripe'
   }
 ];
 
 class CustomerForm extends React.Component {
-
   constructor(props) {
     super(props);
   }
@@ -56,7 +55,12 @@ class CustomerForm extends React.Component {
     const { classes, handleSubmit } = this.props;
 
     return (
-      <form className={classes.container} noValidate autoComplete="off" onSubmit={handleSubmit}>
+      <form
+        className={classes.container}
+        noValidate
+        autoComplete="off"
+        onSubmit={handleSubmit}
+      >
         <Field
           name="name"
           label="Name"
@@ -79,22 +83,21 @@ class CustomerForm extends React.Component {
           component={TextField}
           SelectProps={{
             MenuProps: {
-              className: classes.menu,
-            },
+              className: classes.menu
+            }
           }}
           helperText="Please select your payment method"
           margin="normal"
         >
-          {
-            paymentTypes.map(option => (
-              <MenuItem key={option.value} value={option.label}>
-                {option.label}
-              </MenuItem>
-            ))
-          }
+          {paymentTypes.map(option => (
+            <MenuItem key={option.value} value={option.label}>
+              {option.label}
+            </MenuItem>
+          ))}
         </Field>
         <p>
-          Safe money transfer using your bank account. Visa, Maestro, Discover, American Express.
+          Safe money transfer using your bank account. Visa, Maestro, Discover,
+          American Express.
         </p>
         <div className={classes.fieldSet}>
           <Field
@@ -130,13 +133,12 @@ class CustomerForm extends React.Component {
           Save details
         </Button>
       </form>
-
     );
   }
 }
 
 CustomerForm.propTypes = {
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired
 };
 
 CustomerForm = reduxForm({

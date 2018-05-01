@@ -11,8 +11,11 @@
   "dependencies": {
     "@material-ui/icons": "^1.0.0-beta.43",
     "gh-pages": "^1.1.0",
+    "husky": "^0.14.3",
+    "lint-staged": "^7.0.5",
     "material-ui": "next",
     "node-sass-chokidar": "^1.2.2",
+    "prettier": "^1.12.1",
     "react": "^16.3.1",
     "react-dom": "^16.3.1",
     "react-redux": "^5.0.7",
@@ -20,7 +23,6 @@
     "redux": "^3.7.2",
     "redux-form": "^7.3.0",
     "redux-form-material-ui": "next",
-    "redux-thunk": "^2.2.0",
     "shortid": "^2.2.8"
   },
   "scripts": {
@@ -28,9 +30,16 @@
     "watch-css": "npm run build-css && node-sass-chokidar src/ -o src/ --watch --recursive",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
+    "precommit": "lint-staged",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
+  },
+  "lint-staged": {
+    "src/**/*.{js,css}": [
+      "prettier --single-quote --write",
+      "git add"
+    ]
   }
 }

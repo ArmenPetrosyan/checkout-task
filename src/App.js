@@ -3,9 +3,7 @@ import CheckoutPage from './pages/CheckoutPage';
 
 class App extends Component {
   render() {
-    return (
-      <CheckoutPage />
-    );
+    return <CheckoutPage />;
   }
 }
 

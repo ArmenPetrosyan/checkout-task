@@ -17,8 +17,8 @@ class CustomerList extends Component {
     super();
     this.state = {
       checkedRadio: '',
-      anchorEl: null,
-    }
+      anchorEl: null
+    };
   }
 
   onRadioChecked = event => {
@@ -29,11 +29,11 @@ class CustomerList extends Component {
     });
   };
 
-  onCustomerMenuClick = event =>  {
+  onCustomerMenuClick = event => {
     this.setState({ anchorEl: event.currentTarget });
   };
 
-  onCustomerMenuClose = () =>  {
+  onCustomerMenuClose = () => {
     this.setState({ anchorEl: null });
   };
 
@@ -49,28 +49,24 @@ class CustomerList extends Component {
     this.onCustomerMenuClose();
   };
 
-  render () {
+  render() {
     const { anchorEl } = this.state;
     const { classes } = this.props;
 
     return (
       <div className={classes.customerList}>
-        {
-          this.props.customers.map(
-            (customer) => (
-              <Customer
-                key={customer.id}
-                onCustomerMenuClick={this.onCustomerMenuClick}
-                onCustomerMenuClose={this.onCustomerMenuClose}
-                onDeleteButtonClick={this.onDeleteButtonClick}
-                onRadioChecked={this.onRadioChecked}
-                anchorEl={anchorEl}
-                customer={customer}
-                isChecked={this.props.selectedCustomer == customer.id}
-              />
-            )
-          )
-        }
+        {this.props.customers.map(customer => (
+          <Customer
+            key={customer.id}
+            onCustomerMenuClick={this.onCustomerMenuClick}
+            onCustomerMenuClose={this.onCustomerMenuClose}
+            onDeleteButtonClick={this.onDeleteButtonClick}
+            onRadioChecked={this.onRadioChecked}
+            anchorEl={anchorEl}
+            customer={customer}
+            isChecked={this.props.selectedCustomer == customer.id}
+          />
+        ))}
         <Menu
           id={'menu'}
           anchorEl={anchorEl}
@@ -81,8 +77,8 @@ class CustomerList extends Component {
           <MenuItem onClick={this.onDeleteButtonClick}>Delete</MenuItem>
         </Menu>
       </div>
-    )
+    );
   }
-};
+}
 
 export default withStyles(styles)(CustomerList);

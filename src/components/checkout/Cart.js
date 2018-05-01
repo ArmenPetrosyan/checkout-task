@@ -11,7 +11,7 @@ import CartItems from './CartItems/CartItems';
 const styles = theme => ({
   root: theme.mixins.gutters({
     paddingTop: 16,
-    paddingBottom: 16,
+    paddingBottom: 16
   }),
   total: {
     marginTop: 20,
@@ -20,7 +20,7 @@ const styles = theme => ({
     paddingLeft: 20
   },
   button: {
-    margin: theme.spacing.unit*3,
+    margin: theme.spacing.unit * 3
   },
   list: {
     paddingTop: 5,
@@ -32,9 +32,9 @@ const submitCart = () => {
   alert('Shopping Cart was successfully submitted!');
 };
 
-const CheckoutCart = (props) => {
+const CheckoutCart = props => {
   const { classes } = props;
-  const {subtotal, VAT, serviceTax} = props.cart;
+  const { subtotal, VAT, serviceTax } = props.cart;
   return (
     <aside className="CheckoutCart">
       <div className="CheckoutCart__header">
@@ -48,7 +48,7 @@ const CheckoutCart = (props) => {
 
       <Divider light />
 
-      <CartItems items={props.cart.items}/>
+      <CartItems items={props.cart.items} />
 
       <Divider light />
 
@@ -57,23 +57,19 @@ const CheckoutCart = (props) => {
           <ListItemText primary={`Subtotal: $${subtotal}`} />
         </ListItem>
 
-        {
-          (serviceTax)
-            ?
-            <ListItem className={classes.list}>
-              <ListItemText primary={`Payment processing services: $${serviceTax}`} />
-            </ListItem>
-            : null
-        }
+        {serviceTax ? (
+          <ListItem className={classes.list}>
+            <ListItemText
+              primary={`Payment processing services: $${serviceTax}`}
+            />
+          </ListItem>
+        ) : null}
 
-        {
-          (VAT)
-            ?
-            <ListItem className={classes.list}>
-              <ListItemText primary={`VAT: $${VAT}`} />
-            </ListItem>
-            : null
-        }
+        {VAT ? (
+          <ListItem className={classes.list}>
+            <ListItemText primary={`VAT: $${VAT}`} />
+          </ListItem>
+        ) : null}
       </List>
 
       <Divider light />

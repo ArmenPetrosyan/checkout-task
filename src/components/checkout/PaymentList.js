@@ -21,7 +21,7 @@ const styles = theme => ({
     boxShadow: 'none'
   },
   checked: {
-    color: green[500],
+    color: green[500]
   },
   label: {
     display: 'flex',
@@ -33,15 +33,20 @@ const styles = theme => ({
   }
 });
 
-let Payment = ({payment, classes, isChecked, onRadioChecked}) => (
+let Payment = ({ payment, classes, isChecked, onRadioChecked }) => (
   <Card className={classes.card}>
     <CardHeader
       title={
-        <label
-          className={classes.label}
-          htmlFor={`payment_cb_${payment.id}`}
-        >
-          { (payment.logo) ? <img className={classes.logo} src={payment.logo} alt={payment.title}/> : payment.title }
+        <label className={classes.label} htmlFor={`payment_cb_${payment.id}`}>
+          {payment.logo ? (
+            <img
+              className={classes.logo}
+              src={payment.logo}
+              alt={payment.title}
+            />
+          ) : (
+            payment.title
+          )}
         </label>
       }
     />
@@ -52,7 +57,7 @@ let Payment = ({payment, classes, isChecked, onRadioChecked}) => (
       aria-label={payment.title}
       onClick={onRadioChecked}
       classes={{
-        checked: classes.checked,
+        checked: classes.checked
       }}
     />
   </Card>
@@ -68,34 +73,32 @@ class CustomerList extends Component {
   onRadioChecked = event => {
     const targetPayment = event.target.value;
 
-    const currentPayment = this.props.payments.filter(({id:currentID}) => currentID == targetPayment)[0];
-    const {serviceTax, VAT} = currentPayment;
+    const currentPayment = this.props.payments.filter(
+      ({ id: currentID }) => currentID == targetPayment
+    )[0];
+    const { serviceTax, VAT } = currentPayment;
     const subtotal = this.props.subtotal;
 
     this.props.onPaymentChange(targetPayment);
     this.props.onCartRecalc(serviceTax, VAT, subtotal);
   };
 
-  render () {
+  render() {
     const { classes } = this.props;
 
     return (
       <div className={classes.customerList}>
-        {
-          this.props.payments.map(
-            (payment) => (
-              <Payment
-                key={payment.id}
-                isChecked={this.props.selectedPayment == payment.id}
-                onRadioChecked={this.onRadioChecked}
-                payment={payment}
-              />
-            )
-          )
-        }
+        {this.props.payments.map(payment => (
+          <Payment
+            key={payment.id}
+            isChecked={this.props.selectedPayment == payment.id}
+            onRadioChecked={this.onRadioChecked}
+            payment={payment}
+          />
+        ))}
       </div>
-    )
+    );
   }
-};
+}
 
 export default withStyles(styles)(CustomerList);

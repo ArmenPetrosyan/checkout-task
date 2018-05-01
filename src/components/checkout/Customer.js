@@ -7,10 +7,9 @@ import green from 'material-ui/colors/green';
 import Radio from 'material-ui/Radio';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 
-
 const styles = theme => ({
   checked: {
-    color: green[500],
+    color: green[500]
   },
   card: {
     maxWidth: 400,
@@ -23,19 +22,20 @@ const styles = theme => ({
 });
 
 class Customer extends Component {
-  render () {
+  render() {
     const { classes, anchorEl } = this.props;
-    const { id:customerID, name:customerName, paymentType } = this.props.customer;
+    const {
+      id: customerID,
+      name: customerName,
+      paymentType
+    } = this.props.customer;
 
     return (
       <Card className={classes.card}>
         <CardHeader
           avatar={
-            <Avatar
-              aria-label="Recipe"
-              className={classes.avatar}
-            >
-              {customerName.slice(0,2).toUpperCase()}
+            <Avatar aria-label="Recipe" className={classes.avatar}>
+              {customerName.slice(0, 2).toUpperCase()}
             </Avatar>
           }
           action={
@@ -46,7 +46,6 @@ class Customer extends Component {
                 onClick={this.props.onCustomerMenuClick}
               >
                 <MoreVertIcon />
-
               </IconButton>
             </div>
           }
@@ -59,12 +58,12 @@ class Customer extends Component {
           value={`${customerID}`}
           aria-label={customerName}
           classes={{
-            checked: classes.checked,
+            checked: classes.checked
           }}
         />
       </Card>
-    )
+    );
   }
-};
+}
 
 export default withStyles(styles)(Customer);
