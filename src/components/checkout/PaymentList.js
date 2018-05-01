@@ -3,7 +3,6 @@ import { withStyles } from 'material-ui/styles';
 import green from 'material-ui/colors/green';
 import Card, { CardHeader } from 'material-ui/Card';
 import Radio from 'material-ui/Radio';
-import paypal from './../../assets/PayPal.svg'
 
 const styles = theme => ({
   customerList: {

@@ -5,6 +5,7 @@ import Divider from 'material-ui/Divider';
 import Stepper, { Step, StepLabel } from 'material-ui/Stepper';
 import Button from 'material-ui/Button';
 import AddIcon from '@material-ui/icons/Add';
+import ChevronLeft from '@material-ui/icons/ChevronLeft';
 import Modal from 'material-ui/Modal';
 import CustomerList from './CustomerList';
 import PaymentList from './PaymentList';
@@ -116,6 +117,10 @@ class CheckoutMain extends Component {
     }
   };
 
+  returnToAccount = () => {
+    this.props.onStepChange(steps.CUSTOMER_SELECTION);
+  };
+
   render () {
     const {classes} = this.props;
     const {currentCustomerID} = this.state;
@@ -158,36 +163,49 @@ class CheckoutMain extends Component {
             >
               <AddIcon />
             </Button>
-          </div> :
-          <PaymentList
-            subtotal={this.props.subtotal}
-            onPaymentChange={this.props.onPaymentChange}
-            onCartRecalc={this.props.onCartRecalc}
-            selectedPayment={this.props.checkout.selectedPayment}
-            payments={this.props.checkout.payments}
-          />
-        }
-        <Modal
-          open={this.state.popupOpened}
-          onClose={this.handleClose}
-        >
-          <div style={getModalStyle()} className={classes.paper}>
-            <CustomerForm
-              onCustomerEdit={this.props.onCustomerEdit}
-              onSubmit={this.customerFormSubmit}
-              initialValues={this.getCustomer(currentCustomerID)}
-            />
-          </div>
-        </Modal>
+            <Modal
+              open={this.state.popupOpened}
+              onClose={this.handleClose}
+            >
+              <div style={getModalStyle()} className={classes.paper}>
+                <CustomerForm
+                  onCustomerEdit={this.props.onCustomerEdit}
+                  onSubmit={this.customerFormSubmit}
+                  initialValues={this.getCustomer(currentCustomerID)}
+                />
+              </div>
+            </Modal>
 
-        <Button
-          variant="flat"
-          color="primary"
-          className={classes.button}
-          onClick={this.continuePayment}
-        >
-          Continue to payment
-        </Button>
+            <br/>
+
+            <Button
+              variant="flat"
+              color="primary"
+              className={classes.button}
+              onClick={this.continuePayment}
+            >
+              Continue to payment
+            </Button>
+          </div> :
+          <div>
+            <PaymentList
+              subtotal={this.props.subtotal}
+              onPaymentChange={this.props.onPaymentChange}
+              onCartRecalc={this.props.onCartRecalc}
+              selectedPayment={this.props.checkout.selectedPayment}
+              payments={this.props.checkout.payments}
+            />
+            <Button
+              variant="flat"
+              color="primary"
+              className={classes.button}
+              onClick={this.returnToAccount}
+            >
+              <ChevronLeft />
+              Return to customer account
+            </Button>
+          </div>
+        }
       </main>
     )
   }
