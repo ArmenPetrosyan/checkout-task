@@ -49,7 +49,7 @@ class App extends Component {
     return (
       <section className="Checkout">
         <Grid container spacing={24}>
-          <Grid item sm={8}>
+          <Grid item xs={12} sm={7} lg={8}>
             <CheckoutMain
               onCustomerChange={this.props.onCustomerChange}
               onPaymentChange={this.props.onPaymentChange}
@@ -62,7 +62,7 @@ class App extends Component {
               subtotal={this.props.cart.subtotal}
             />
           </Grid>
-          <Grid item sm={4}>
+          <Grid item xs={12} sm={5} lg={4}>
             <CheckoutCart
               cart={this.props.cart}
               completed={this.props.checkout.completed}
