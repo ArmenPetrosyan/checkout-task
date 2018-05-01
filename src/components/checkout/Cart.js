@@ -29,7 +29,7 @@ const styles = theme => ({
 });
 
 const submitCart = () => {
-  alert('Shopping Cart was submitted!');
+  alert('Shopping Cart was successfully submitted!');
 };
 
 const CheckoutCart = (props) => {

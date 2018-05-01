@@ -78,7 +78,8 @@ const checkoutReducer = (state = initialState, action) => {
     case 'SELECT_PAYMENT': {
       return {
         ...state,
-        selectedPayment: action.payload
+        selectedPayment: action.payload,
+        completed: true
       }
     }
     case 'CHANGE_STEP': {

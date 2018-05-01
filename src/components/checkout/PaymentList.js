@@ -17,7 +17,9 @@ const styles = theme => ({
     display: 'flex',
     flexDirection: 'row-reverse',
     justifyContent: 'flex-end',
-    alignItems: 'center'
+    alignItems: 'center',
+    background: '#f7fbff',
+    boxShadow: 'none'
   },
   checked: {
     color: green[500],
