@@ -5,14 +5,13 @@
 	&Main {
 		padding-left: 30px;
 		padding-right: 30px;
-		//flex-grow: 5;
 	}
 
 	&Cart {
 		padding-left: 30px;
 		padding-right: 30px;
-		//flex-grow: 1;
 		background: #f7fbff;
+		height: 100%;
 
 		&__title {
 			margin-bottom: 20px;

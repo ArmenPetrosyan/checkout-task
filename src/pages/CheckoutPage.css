@@ -7,7 +7,8 @@
   .CheckoutCart {
     padding-left: 30px;
     padding-right: 30px;
-    background: #f7fbff; }
+    background: #f7fbff;
+    height: 100%; }
     .CheckoutCart__title {
       margin-bottom: 20px; }
     .CheckoutCart__header {

@@ -1,5 +1,7 @@
 import * as steps from './../steps';
-var shortid = require('shortid');
+import paypalLogo from './../assets/PayPal.svg';
+import visaLogo from './../assets/Visa.svg';
+const shortid = require('shortid');
 
 const initialState = {
   customers: [
@@ -27,13 +29,15 @@ const initialState = {
       id: 1,
       title: 'PayPal',
       serviceTax: 0.01,
-      VAT : 0.05
+      VAT : 0.05,
+      logo: paypalLogo
     },
     {
       id: 2,
       title: 'Visa',
       serviceTax: 0.01,
-      VAT : 0
+      VAT : 0,
+      logo: visaLogo
     },
     {
       id: 3,

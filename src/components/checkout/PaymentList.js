@@ -23,6 +23,14 @@ const styles = theme => ({
   },
   checked: {
     color: green[500],
+  },
+  label: {
+    display: 'flex',
+    alignItems: 'center'
+  },
+  logo: {
+    marginRight: 10,
+    maxHeight: 25
   }
 });
 
@@ -30,8 +38,11 @@ let Payment = ({payment, classes, isChecked, onRadioChecked}) => (
   <Card className={classes.card}>
     <CardHeader
       title={
-        <label htmlFor={`payment_cb_${payment.id}`}>
-          {payment.title}
+        <label
+          className={classes.label}
+          htmlFor={`payment_cb_${payment.id}`}
+        >
+          { (payment.logo) ? <img className={classes.logo} src={payment.logo} alt={payment.title}/> : payment.title }
         </label>
       }
     />
