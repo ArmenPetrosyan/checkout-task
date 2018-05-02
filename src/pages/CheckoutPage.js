@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import CheckoutMain from '../components/checkout/Checkout';
 import CheckoutCart from '../components/checkout/Cart';
 import Grid from 'material-ui/Grid';
@@ -73,5 +74,19 @@ class App extends Component {
     );
   }
 }
+
+App.propTypes = {
+  onCustomerChange: PropTypes.func,
+  onPaymentChange: PropTypes.func,
+  onCartRecalc: PropTypes.func,
+  onStepChange: PropTypes.func,
+  onCustomerDelete: PropTypes.func,
+  onCustomerEdit: PropTypes.func,
+  onCustomerAdd: PropTypes.func,
+  checkout: PropTypes.object,
+  cart: PropTypes.object,
+  subtotal: PropTypes.number,
+  completed: PropTypes.bool
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

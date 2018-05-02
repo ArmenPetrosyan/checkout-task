@@ -5,7 +5,6 @@ import { withStyles } from 'material-ui/styles';
 import { TextField } from 'redux-form-material-ui';
 import Button from 'material-ui/Button';
 import MenuItem from 'material-ui/Menu/MenuItem';
-import Grid from 'material-ui/Grid';
 
 const styles = theme => ({
   container: {
@@ -49,10 +48,6 @@ const paymentTypes = [
 ];
 
 class CustomerForm extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     const { classes, handleSubmit } = this.props;
 

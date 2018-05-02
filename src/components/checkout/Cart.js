@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import List, { ListItem, ListItemText } from 'material-ui/List';
 import Divider from 'material-ui/Divider';
@@ -88,6 +89,11 @@ const CheckoutCart = props => {
       </Button>
     </aside>
   );
+};
+
+CheckoutCart.propTypes = {
+  cart: PropTypes.object,
+  completed: PropTypes.bool
 };
 
 export default withStyles(styles)(CheckoutCart);
