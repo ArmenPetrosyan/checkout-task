@@ -65,7 +65,7 @@ const checkoutReducer = (state = initialState, action) => {
         ...state,
         customers: state.customers.map(
           customer =>
-            customer.id == action.payload.id
+            customer.id === action.payload.id
               ? { ...customer, ...action.payload }
               : customer
         )
@@ -75,9 +75,9 @@ const checkoutReducer = (state = initialState, action) => {
       return {
         ...state,
         customers: state.customers.filter(
-          customer => customer.id != action.payload
+          customer => customer.id !== action.payload
         ),
-        selected: 0
+        selectedCustomer: null
       };
     }
     case 'SELECT_CUSTOMER': {
@@ -97,7 +97,7 @@ const checkoutReducer = (state = initialState, action) => {
       return {
         ...state,
         step: action.payload,
-        completed: action.payload == steps.PAYMENT_DONE
+        completed: action.payload === steps.PAYMENT_DONE
       };
     }
     default:

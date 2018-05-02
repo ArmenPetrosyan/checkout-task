@@ -64,7 +64,7 @@ class CustomerList extends Component {
             onRadioChecked={this.onRadioChecked}
             anchorEl={anchorEl}
             customer={customer}
-            isChecked={this.props.selectedCustomer == customer.id}
+            isChecked={this.props.selectedCustomer === customer.id}
           />
         ))}
         <Menu

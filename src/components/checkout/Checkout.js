@@ -107,7 +107,7 @@ class CheckoutMain extends Component {
       cvv: '000'
     };
     return this.state.formType !== 'create'
-      ? this.props.checkout.customers.filter(({ id }) => id == customerID)[0]
+      ? this.props.checkout.customers.filter(({ id }) => id === customerID)[0]
       : defaultCustomer;
   };
 
@@ -146,7 +146,7 @@ class CheckoutMain extends Component {
           })}
         </Stepper>
 
-        {this.props.checkout.step == steps.CUSTOMER_SELECTION ? (
+        {this.props.checkout.step === steps.CUSTOMER_SELECTION ? (
           <div className={classes}>
             <CustomerList
               customers={this.props.checkout.customers}

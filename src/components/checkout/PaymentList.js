@@ -53,7 +53,7 @@ let Payment = ({ payment, classes, isChecked, onRadioChecked }) => (
     <Radio
       id={`payment_cb_${payment.id}`}
       checked={isChecked}
-      value={payment.id}
+      value={`${payment.id}`}
       aria-label={payment.title}
       onClick={onRadioChecked}
       classes={{
@@ -66,15 +66,11 @@ let Payment = ({ payment, classes, isChecked, onRadioChecked }) => (
 Payment = withStyles(styles)(Payment);
 
 class CustomerList extends Component {
-  constructor() {
-    super();
-  }
-
   onRadioChecked = event => {
     const targetPayment = event.target.value;
 
     const currentPayment = this.props.payments.filter(
-      ({ id: currentID }) => currentID == targetPayment
+      ({ id: currentID }) => currentID === Number.parseInt(targetPayment)
     )[0];
     const { serviceTax, VAT } = currentPayment;
     const subtotal = this.props.subtotal;
@@ -91,7 +87,9 @@ class CustomerList extends Component {
         {this.props.payments.map(payment => (
           <Payment
             key={payment.id}
-            isChecked={this.props.selectedPayment == payment.id}
+            isChecked={
+              Number.parseInt(this.props.selectedPayment) === payment.id
+            }
             onRadioChecked={this.onRadioChecked}
             payment={payment}
           />
