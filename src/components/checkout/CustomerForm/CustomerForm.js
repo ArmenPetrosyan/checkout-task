@@ -5,6 +5,7 @@ import { withStyles } from 'material-ui/styles';
 import { TextField } from 'redux-form-material-ui';
 import Button from 'material-ui/Button';
 import MenuItem from 'material-ui/Menu/MenuItem';
+import Grid from 'material-ui/Grid';
 
 const styles = theme => ({
   container: {
@@ -18,7 +19,8 @@ const styles = theme => ({
     width: 200
   },
   fieldSet: {
-    display: 'flex'
+    display: 'flex',
+    flexWrap: 'wrap'
   },
   button: {
     marginTop: 40
